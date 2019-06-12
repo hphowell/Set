@@ -27,8 +27,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchDeal3MoreCards(_ sender: UIButton) {
-        game.deal3MoreCards()
-        updateViewFromModel()
+        if game.cardsOnTheBoard.count < cardButtons.count-2 {
+            game.deal3MoreCards()
+            updateViewFromModel()
+        }
+        
     }
     
     @IBOutlet var cardButtons: [UIButton]!
@@ -95,6 +98,5 @@ class ViewController: UIViewController {
         }
         scoreLabel.text = "Score: \(game.score)"
     }
-    
 }
 

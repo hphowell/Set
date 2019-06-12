@@ -19,7 +19,16 @@ class Set
         get {
             var matching = false
             if selectedCards.count == 3 {
-                matching = true
+                if (selectedCards[0].shape == selectedCards[1].shape && selectedCards[0].shape == selectedCards[2].shape) || (selectedCards[0].shape != selectedCards[1].shape && selectedCards[0].shape != selectedCards[2].shape) {
+                    if (selectedCards[0].color == selectedCards[1].color && selectedCards[0].color == selectedCards[2].color) || (selectedCards[0].color != selectedCards[1].color && selectedCards[0].color != selectedCards[2].color) {
+                        if (selectedCards[0].number == selectedCards[1].number && selectedCards[0].number == selectedCards[2].number) || (selectedCards[0].number != selectedCards[1].number && selectedCards[0].number != selectedCards[2].number) {
+                            if (selectedCards[0].shading == selectedCards[1].shading && selectedCards[0].shading == selectedCards[2].shading) || (selectedCards[0].shading != selectedCards[1].shading && selectedCards[0].shading != selectedCards[2].shading) {
+                                matching = true
+                            }
+                        }
+                    }
+                }
+                
             }
             return matching
         }
@@ -64,9 +73,10 @@ class Set
             selectedCards = []
             score += 3
         } else {
+            selectedCards = []
             score -= 5
         }
-        if !deck.isEmpty, cardsOnTheBoard.count <= 21 {
+        if !deck.isEmpty {
             for _ in 0..<3 {
                 cardsOnTheBoard.append(deck.remove(at: 0))
             }
