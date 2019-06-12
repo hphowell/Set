@@ -10,12 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var game = Set()
+    let shapes = ["▲","●","■"]
+    lazy var game = Set(shapes: shapes)
 
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func touchNewGame(_ sender: UIButton) {
-        game = Set()
+        game = Set(shapes: shapes)
         updateViewFromModel()
     }
     
@@ -32,7 +33,26 @@ class ViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     
     func updateViewFromModel() {
-        
+        for index in cardButtons.indices {
+            let button = cardButtons[index]
+            if index < game.cardsOnTheBoard.count {
+                let card = game.cardsOnTheBoard[index]
+                button.setTitle(String(index), for: UIControl.State.normal)
+                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                if game.selectedCards.contains(card) {
+                    button.layer.borderWidth = 3.0
+                    button.layer.borderColor = UIColor.blue.cgColor
+                } else {
+                    button.layer.borderWidth = 0.0
+                }
+            } else {
+                button.setTitle("", for: UIControl.State.normal)
+                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                button.layer.borderWidth = 0.0
+            }
+        }
+        scoreLabel.text = "Score: \(game.score)"
     }
+    
 }
 
