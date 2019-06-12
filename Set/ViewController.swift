@@ -10,11 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    @IBAction func touchNewGame(_ sender: UIButton) {
     }
-
-
+    
+    @IBAction func touchCard(_ sender: UIButton) {
+    }
+    
+    @IBAction func touchDeal3MoreCards(_ sender: UIButton) {
+    }
+    
+    @IBOutlet var cardButtons: [UIButton]!
 }
 
