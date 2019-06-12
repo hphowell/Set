@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchDeal3MoreCards(_ sender: UIButton) {
+        game.deal3MoreCards()
+        updateViewFromModel()
     }
     
     @IBOutlet var cardButtons: [UIButton]!
