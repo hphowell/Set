@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let shapes = ["▲","●","■"]
+    
     lazy var game = Set(shapes: shapes)
 
     @IBOutlet weak var scoreLabel: UILabel!
@@ -32,12 +33,53 @@ class ViewController: UIViewController {
     
     @IBOutlet var cardButtons: [UIButton]!
     
+    func getCardLabel(for card: Card) -> NSAttributedString {
+        var rawText = ""
+        for _ in 0..<card.number {
+            rawText += "\(card.shape) "
+        }
+        
+        var strokeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        var foregroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        switch card.color {
+        case .color1:
+            strokeColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            foregroundColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+        case .color2:
+            strokeColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+            foregroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+        case .color3:
+            strokeColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+            foregroundColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+        }
+        
+        var strokeWidth = -1.0
+        switch card.shading {
+        case .shading1:
+            strokeWidth = 5.0
+        case .shading2:
+            strokeWidth = -1.0
+            foregroundColor = foregroundColor.withAlphaComponent(0.15)
+        case .shading3:
+            strokeWidth = -1.0
+        }
+        
+        let attributes : [NSAttributedString.Key:Any] = [
+            .strokeWidth : strokeWidth,
+            .strokeColor : strokeColor,
+            .foregroundColor : foregroundColor
+        ]
+        let cardLabel = NSAttributedString(string: rawText, attributes: attributes)
+        
+        return cardLabel
+    }
+    
     func updateViewFromModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
             if index < game.cardsOnTheBoard.count {
                 let card = game.cardsOnTheBoard[index]
-                button.setTitle(String(index), for: UIControl.State.normal)
+                button.setAttributedTitle(getCardLabel(for: card), for: UIControl.State.normal)
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 if game.selectedCards.contains(card) {
                     button.layer.borderWidth = 3.0
@@ -46,7 +88,7 @@ class ViewController: UIViewController {
                     button.layer.borderWidth = 0.0
                 }
             } else {
-                button.setTitle("", for: UIControl.State.normal)
+                button.setAttributedTitle(NSAttributedString(string: ""), for: UIControl.State.normal)
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
                 button.layer.borderWidth = 0.0
             }
