@@ -12,6 +12,8 @@
 		3242AC5B22B07CA800A4BB90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3242AC5922B07CA800A4BB90 /* Main.storyboard */; };
 		3242AC5D22B07CA900A4BB90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3242AC5C22B07CA900A4BB90 /* Assets.xcassets */; };
 		3242AC6022B07CA900A4BB90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3242AC5E22B07CA900A4BB90 /* LaunchScreen.storyboard */; };
+		3242AC6922B08CC600A4BB90 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AC6822B08CC600A4BB90 /* Set.swift */; };
+		3242AC6B22B08CF000A4BB90 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AC6A22B08CF000A4BB90 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		3242AC5C22B07CA900A4BB90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3242AC5F22B07CA900A4BB90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3242AC6122B07CA900A4BB90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3242AC6822B08CC600A4BB90 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		3242AC6A22B08CF000A4BB90 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				3242AC5722B07CA800A4BB90 /* ViewController.swift */,
 				3242AC5922B07CA800A4BB90 /* Main.storyboard */,
+				3242AC6822B08CC600A4BB90 /* Set.swift */,
+				3242AC6A22B08CF000A4BB90 /* Card.swift */,
 				3242AC6722B0882000A4BB90 /* Supporting Files */,
 				3242AC6122B07CA900A4BB90 /* Info.plist */,
 			);
@@ -144,7 +150,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3242AC5822B07CA800A4BB90 /* ViewController.swift in Sources */,
+				3242AC6922B08CC600A4BB90 /* Set.swift in Sources */,
 				3242AC5622B07CA800A4BB90 /* AppDelegate.swift in Sources */,
+				3242AC6B22B08CF000A4BB90 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

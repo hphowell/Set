@@ -9,19 +9,28 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    var game = Set()
 
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func touchNewGame(_ sender: UIButton) {
+        game = Set()
+        updateViewFromModel()
     }
     
     @IBAction func touchCard(_ sender: UIButton) {
+        game.selectCard(at: cardButtons.firstIndex(of: sender)!)
+        updateViewFromModel()
     }
     
     @IBAction func touchDeal3MoreCards(_ sender: UIButton) {
     }
     
     @IBOutlet var cardButtons: [UIButton]!
+    
+    func updateViewFromModel() {
+        
+    }
 }
 
