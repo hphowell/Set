@@ -98,5 +98,9 @@ class ViewController: UIViewController {
         }
         scoreLabel.text = "Score: \(game.score)"
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateViewFromModel()
+        
+    }
 }
-

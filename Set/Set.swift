@@ -16,22 +16,27 @@ class Set
     var selectedCards: [Card] = []
     var matchedCards: [Card] = []
     var isMatch: Bool {
-        get {
-            var matching = false
-            if selectedCards.count == 3 {
-                if (selectedCards[0].shape == selectedCards[1].shape && selectedCards[0].shape == selectedCards[2].shape) || (selectedCards[0].shape != selectedCards[1].shape && selectedCards[0].shape != selectedCards[2].shape) {
-                    if (selectedCards[0].color == selectedCards[1].color && selectedCards[0].color == selectedCards[2].color) || (selectedCards[0].color != selectedCards[1].color && selectedCards[0].color != selectedCards[2].color) {
-                        if (selectedCards[0].number == selectedCards[1].number && selectedCards[0].number == selectedCards[2].number) || (selectedCards[0].number != selectedCards[1].number && selectedCards[0].number != selectedCards[2].number) {
-                            if (selectedCards[0].shading == selectedCards[1].shading && selectedCards[0].shading == selectedCards[2].shading) || (selectedCards[0].shading != selectedCards[1].shading && selectedCards[0].shading != selectedCards[2].shading) {
-                                matching = true
-                            }
+
+        var matching = false
+        if selectedCards.count == 3 {
+            let firstCard = selectedCards[0]
+            let secondCard = selectedCards[1]
+            let thirdCard = selectedCards[2]
+            if threeEqualOrNotEqual(first: firstCard.shape, second: secondCard.shape, third: thirdCard.shape) {
+                if threeEqualOrNotEqual(first: firstCard.color, second: secondCard.color, third: thirdCard.color) {
+                    if threeEqualOrNotEqual(first: firstCard.number, second: secondCard.number, third: thirdCard.number) {
+                        if threeEqualOrNotEqual(first: firstCard.shading, second: secondCard.shading, third: thirdCard.shading) {
+                            matching = true
                         }
                     }
                 }
-                
             }
-            return matching
         }
+        return matching
+    }
+    
+    func threeEqualOrNotEqual<T: Equatable>(first: T, second: T, third: T) -> Bool {
+        return (first == second && first == third) || (first != second && first != third)
     }
     
     var score = 0
