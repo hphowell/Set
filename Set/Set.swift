@@ -36,7 +36,7 @@ class Set
     }
     
     func threeEqualOrNotEqual<T: Equatable>(first: T, second: T, third: T) -> Bool {
-        return (first == second && first == third) || (first != second && first != third)
+        return (first == second && first == third) || (first != second && first != third && second != third)
     }
     
     var score = 0
