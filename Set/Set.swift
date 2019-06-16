@@ -22,10 +22,10 @@ class Set
             let firstCard = selectedCards[0]
             let secondCard = selectedCards[1]
             let thirdCard = selectedCards[2]
-            if threeEqualOrNotEqual(first: firstCard.shape, second: secondCard.shape, third: thirdCard.shape) {
-                if threeEqualOrNotEqual(first: firstCard.color, second: secondCard.color, third: thirdCard.color) {
-                    if threeEqualOrNotEqual(first: firstCard.number, second: secondCard.number, third: thirdCard.number) {
-                        if threeEqualOrNotEqual(first: firstCard.shading, second: secondCard.shading, third: thirdCard.shading) {
+            if threeEqualOrNotEqual(firstCard.shape, secondCard.shape, thirdCard.shape) {
+                if threeEqualOrNotEqual(firstCard.color, secondCard.color, thirdCard.color) {
+                    if threeEqualOrNotEqual(firstCard.number, secondCard.number, thirdCard.number) {
+                        if threeEqualOrNotEqual(firstCard.shading, secondCard.shading, thirdCard.shading) {
                             matching = true
                         }
                     }
@@ -35,7 +35,7 @@ class Set
         return matching
     }
     
-    func threeEqualOrNotEqual<T: Equatable>(first: T, second: T, third: T) -> Bool {
+    func threeEqualOrNotEqual<T: Equatable>(_ first: T, _ second: T, _ third: T) -> Bool {
         return (first == second && first == third) || (first != second && first != third && second != third)
     }
     
