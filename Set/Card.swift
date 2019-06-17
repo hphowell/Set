@@ -11,10 +11,16 @@ import Foundation
 struct Card: Equatable
 {
     
-    var shape: String
+    var shape: Shape
     var color: Color
     var shading: Shading
     var number: Int
+    
+    enum Shape: CaseIterable {
+        case shape1
+        case shape2
+        case shape3
+    }
     
     enum Shading: CaseIterable {
         case shading1

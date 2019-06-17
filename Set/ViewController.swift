@@ -10,31 +10,29 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let shapes = ["▲","●","■"]
-    
-    lazy var game = Set(shapes: shapes)
+    lazy var game = Set()
 
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func touchNewGame(_ sender: UIButton) {
-        game = Set(shapes: shapes)
-        updateViewFromModel()
+        game = Set()
+//        updateViewFromModel()
     }
     
-    @IBAction func touchCard(_ sender: UIButton) {
-        game.selectCard(at: cardButtons.firstIndex(of: sender)!)
-        updateViewFromModel()
-    }
+//    @IBAction func touchCard(_ sender: UIButton) {
+//        game.selectCard(at: cardButtons.firstIndex(of: sender)!)
+//        updateViewFromModel()
+//    }
     
     @IBAction func touchDeal3MoreCards(_ sender: UIButton) {
-        if game.cardsOnTheBoard.count < cardButtons.count-2 {
+//        if game.cardsOnTheBoard.count < cardButtons.count-2 {
             game.deal3MoreCards()
-            updateViewFromModel()
-        }
+//            updateViewFromModel()
+//        }
         
     }
     
-    @IBOutlet var cardButtons: [UIButton]!
+//    @IBOutlet var cardButtons: [UIButton]!
     
     func getCardLabel(for card: Card) -> NSAttributedString {
         var rawText = ""
@@ -77,30 +75,30 @@ class ViewController: UIViewController {
         return cardLabel
     }
     
-    func updateViewFromModel() {
-        for index in cardButtons.indices {
-            let button = cardButtons[index]
-            if index < game.cardsOnTheBoard.count {
-                let card = game.cardsOnTheBoard[index]
-                button.setAttributedTitle(getCardLabel(for: card), for: UIControl.State.normal)
-                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                if game.selectedCards.contains(card) {
-                    button.layer.borderWidth = 3.0
-                    button.layer.borderColor = UIColor.blue.cgColor
-                } else {
-                    button.layer.borderWidth = 0.0
-                }
-            } else {
-                button.setAttributedTitle(NSAttributedString(string: ""), for: UIControl.State.normal)
-                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-                button.layer.borderWidth = 0.0
-            }
-        }
-        scoreLabel.text = "Score: \(game.score)"
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateViewFromModel()
-        
-    }
+//    func updateViewFromModel() {
+//        for index in cardButtons.indices {
+//            let button = cardButtons[index]
+//            if index < game.cardsOnTheBoard.count {
+//                let card = game.cardsOnTheBoard[index]
+//                button.setAttributedTitle(getCardLabel(for: card), for: UIControl.State.normal)
+//                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//                if game.selectedCards.contains(card) {
+//                    button.layer.borderWidth = 3.0
+//                    button.layer.borderColor = UIColor.blue.cgColor
+//                } else {
+//                    button.layer.borderWidth = 0.0
+//                }
+//            } else {
+//                button.setAttributedTitle(NSAttributedString(string: ""), for: UIControl.State.normal)
+//                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+//                button.layer.borderWidth = 0.0
+//            }
+//        }
+//        scoreLabel.text = "Score: \(game.score)"
+//    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        updateViewFromModel()
+//
+//    }
 }

@@ -88,9 +88,9 @@ class Set
         }
     }
     
-    init(shapes: [String]) {
+    init() {
         allCards = []
-        for shape in shapes {
+        for shape in Card.Shape.allCases {
             for number in 1...3 {
                 for shading in Card.Shading.allCases {
                     for color in Card.Color.allCases {
