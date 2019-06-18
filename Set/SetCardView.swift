@@ -10,9 +10,9 @@ import UIKit
 
 class SetCardView: UIView {
     
-    var shape = "squiggle"
+    var shape = "oval"
     var number = 2
-    var shading = "filled"
+    var shading = "empty"
     var color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
 
 
@@ -155,13 +155,12 @@ class SetCardView: UIView {
 
 extension SetCardView {
     private struct Ratio {
-        static let cardAspectRatio: CGFloat = 5.0/7.0
         static let cornerRadiusToBoundsHeight: CGFloat = 0.06
         static let distanceFromCardSidesToDrawingToBoundsWidth: CGFloat = 0.05
         static let shapeWidthToBoundsWidth: CGFloat = 0.6
         static let shapeHeightToBoundsHeight: CGFloat = 0.15
         static let spacingBetweenShapesToBoundsHeight: CGFloat = 0.3
-        static let lineWidth: CGFloat = 5.0
+        static let lineWidth: CGFloat = 0.0125
         static let numberOfStripes: CGFloat = 10.0
     }
     
@@ -185,7 +184,7 @@ extension SetCardView {
         return bounds.size.height * Ratio.spacingBetweenShapesToBoundsHeight
     }
     private var lineWidth: CGFloat {
-        return Ratio.lineWidth
+        return Ratio.lineWidth*bounds.size.width
     }
     private var numberOfStripes: CGFloat {
         return Ratio.numberOfStripes

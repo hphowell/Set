@@ -42,13 +42,6 @@
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jTf-Eq-aTf" customClass="SetBoardView" customModule="Set" customModuleProvider="target">
                                 <rect key="frame" x="16" y="83" width="343" height="646"/>
-                                <subviews>
-                                    <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RoG-uS-nR2" customClass="SetCardView" customModule="Set" customModuleProvider="target">
-                                        <rect key="frame" x="63" y="179" width="216" height="288"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                </subviews>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.00096959455142308281" green="0.34146914779898474" blue="0.0015044142285383143" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -69,6 +62,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="board" destination="jTf-Eq-aTf" id="Ccj-JU-kN0"/>
                         <outlet property="scoreLabel" destination="LDT-ia-4Jt" id="5St-EC-rcp"/>
                     </connections>
                 </viewController>

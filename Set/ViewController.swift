@@ -11,7 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var game = Set()
-
+    @IBOutlet weak var board: SetBoardView!
+    
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func touchNewGame(_ sender: UIButton) {
@@ -96,9 +97,9 @@ class ViewController: UIViewController {
 //        }
 //        scoreLabel.text = "Score: \(game.score)"
 //    }
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        updateViewFromModel()
-//
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        board.createCardsView()
+
+    }
 }
