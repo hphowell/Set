@@ -10,9 +10,9 @@ import UIKit
 
 class SetCardView: UIView {
     
-    var shape = "oval"
-    var number = 2
-    var shading = "filled"
+    var shape = "diamond"
+    var number = 3
+    var shading = "striped"
     var color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
 
 
@@ -35,6 +35,9 @@ class SetCardView: UIView {
         stripes.lineWidth = lineWidth
         
         func drawShape(path: UIBezierPath) {
+            color.setStroke()
+            color.setFill()
+            path.lineWidth = lineWidth
             if number == 1 {
                 if shading == "empty" {
                     path.stroke()
@@ -109,33 +112,37 @@ class SetCardView: UIView {
             }
         }
         
-        func drawOvals(numberOfOvals: Int, color: UIColor, shading: String) {
+        func drawOvals() {
             let path = UIBezierPath()
-            path.move(to: CGPoint(x: bounds.midX - 1/2*ovalLineLength, y: bounds.midY - 1/2*ovalHeight))
-            path.addLine(to: path.currentPoint.offsetBy(dx: ovalLineLength, dy: 0))
-            path.addArc(withCenter: path.currentPoint.offsetBy(dx: 0, dy: 1/2*ovalHeight), radius: -1/2*ovalHeight, startAngle: .pi/2, endAngle: 3 * .pi/2, clockwise: true)
-            path.addLine(to: path.currentPoint.offsetBy(dx: -ovalLineLength, dy: 0))
-            path.addArc(withCenter: path.currentPoint.offsetBy(dx: 0, dy: -1/2*ovalHeight), radius: -1/2*ovalHeight, startAngle: -.pi/2, endAngle: .pi/2, clockwise: true)
-            color.setStroke()
-            color.setFill()
-            path.lineWidth = lineWidth
+            path.move(to: CGPoint(x: bounds.midX - 1/2*(shapeWidth-shapeHeight), y: bounds.midY - 1/2*shapeHeight))
+            path.addLine(to: path.currentPoint.offsetBy(dx: shapeWidth-shapeHeight, dy: 0))
+            path.addArc(withCenter: path.currentPoint.offsetBy(dx: 0, dy: 1/2*shapeHeight), radius: -1/2*shapeHeight, startAngle: .pi/2, endAngle: 3 * .pi/2, clockwise: true)
+            path.addLine(to: path.currentPoint.offsetBy(dx: -shapeWidth+shapeHeight, dy: 0))
+            path.addArc(withCenter: path.currentPoint.offsetBy(dx: 0, dy: -1/2*shapeHeight), radius: -1/2*shapeHeight, startAngle: -.pi/2, endAngle: .pi/2, clockwise: true)
             drawShape(path: path)
             
         }
-        func drawSquiggles(numberOfSquiggles: Int, color: UIColor, shading: String) {
+        func drawSquiggles() {
             let path = UIBezierPath()
+            drawShape(path: path)
         }
-        func drawDiamonds(numberOfDiamonds: Int, color: UIColor, shading: String) {
+        func drawDiamonds() {
             let path = UIBezierPath()
+            path.move(to: CGPoint(x: bounds.midX, y: bounds.midY - 1/2*shapeHeight))
+            path.addLine(to: path.currentPoint.offsetBy(dx: 1/2*shapeWidth, dy: 1/2*shapeHeight))
+            path.addLine(to: CGPoint(x: bounds.midX, y: bounds.midY + 1/2*shapeHeight))
+            path.addLine(to: path.currentPoint.offsetBy(dx: -1/2*shapeWidth, dy: -1/2*shapeHeight))
+            path.close()
+            drawShape(path: path)
         }
         if shape == "oval" {
-            drawOvals(numberOfOvals: number, color: color, shading: shading)
+            drawOvals()
         } else if shape == "squiggle" {
-            drawSquiggles(numberOfSquiggles: number, color: color, shading: shading)
+            drawSquiggles()
         } else if shape == "diamond" {
-            drawDiamonds(numberOfDiamonds: number, color: color, shading: shading)
+            drawDiamonds()
         } else {
-            print("Number is invalid. Must be 1, 2, or 3.")
+            print("Shape is invalid. Must be oval, squiggle, or diamond.")
         }
     }
 }
@@ -145,8 +152,8 @@ extension SetCardView {
         static let cardAspectRatio: CGFloat = 5.0/7.0
         static let cornerRadiusToBoundsHeight: CGFloat = 0.06
         static let distanceFromCardSidesToDrawingToBoundsWidth: CGFloat = 0.05
-        static let ovalLineLengthToBoundsWidth: CGFloat = 0.6
-        static let ovalHeightToBoundsHeight: CGFloat = 0.15
+        static let shapeWidthToBoundsWidth: CGFloat = 0.6
+        static let shapeHeightToBoundsHeight: CGFloat = 0.15
         static let spacingBetweenShapesToBoundsHeight: CGFloat = 0.3
         static let lineWidth: CGFloat = 5.0
         static let numberOfStripes: CGFloat = 10.0
@@ -160,12 +167,12 @@ extension SetCardView {
         return bounds.size.width * Ratio.distanceFromCardSidesToDrawingToBoundsWidth
     }
     
-    private var ovalLineLength: CGFloat {
-        return bounds.size.width * Ratio.ovalLineLengthToBoundsWidth
+    private var shapeWidth: CGFloat {
+        return bounds.size.width * Ratio.shapeWidthToBoundsWidth
     }
     
-    private var ovalHeight: CGFloat {
-        return bounds.size.height * Ratio.ovalHeightToBoundsHeight
+    private var shapeHeight: CGFloat {
+        return bounds.size.height * Ratio.shapeHeightToBoundsHeight
     }
     
     private var spacingBetweenShapes: CGFloat {

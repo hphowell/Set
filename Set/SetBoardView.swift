@@ -17,9 +17,10 @@ class SetBoardView: UIView {
         // Drawing code
     }
     */
+    var numberOfCards = 12
     private func createCardsView () {
         var grid = Grid(layout: .aspectRatio(Ratios.cardAspectRatio), frame: bounds)
-        grid.cellCount = 12
+        grid.cellCount = numberOfCards
     }
 
 }
