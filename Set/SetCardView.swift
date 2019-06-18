@@ -10,9 +10,9 @@ import UIKit
 
 class SetCardView: UIView {
     
-    var shape = "diamond"
-    var number = 3
-    var shading = "striped"
+    var shape = "squiggle"
+    var number = 2
+    var shading = "filled"
     var color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
 
 
@@ -124,6 +124,12 @@ class SetCardView: UIView {
         }
         func drawSquiggles() {
             let path = UIBezierPath()
+            path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY).offsetBy(dx: 1/4*shapeWidth, dy: -1/6*shapeHeight), radius: 1/4*shapeWidth, startAngle: 0, endAngle: .pi, clockwise: false)
+            path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY).offsetBy(dx: -1/4*shapeWidth, dy: -1/6*shapeHeight), radius: 1/4*shapeWidth, startAngle: 0, endAngle: .pi, clockwise: true)
+            path.addLine(to: path.currentPoint.offsetBy(dx: 0, dy: 1/3*shapeHeight))
+            path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY).offsetBy(dx: -1/4*shapeWidth, dy: 1/6*shapeHeight), radius: 1/4*shapeWidth, startAngle: .pi, endAngle: 0, clockwise: false)
+            path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY).offsetBy(dx: 1/4*shapeWidth, dy: 1/6*shapeHeight), radius: 1/4*shapeWidth, startAngle: .pi, endAngle: 0, clockwise: true)
+            path.addLine(to: path.currentPoint.offsetBy(dx: 0, dy: -1/3*shapeHeight))
             drawShape(path: path)
         }
         func drawDiamonds() {
