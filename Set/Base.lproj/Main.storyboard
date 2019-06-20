@@ -42,6 +42,11 @@
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jTf-Eq-aTf" customClass="SetBoardView" customModule="Set" customModuleProvider="target">
                                 <rect key="frame" x="16" y="83" width="343" height="646"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="EeV-ZS-iNK" appends="YES" id="fq7-Wj-Kq9"/>
+                                    <outletCollection property="gestureRecognizers" destination="uzy-0m-FGE" appends="YES" id="lwK-tZ-faF"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.00096959455142308281" green="0.34146914779898474" blue="0.0015044142285383143" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -67,6 +72,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="EeV-ZS-iNK">
+                    <connections>
+                        <action selector="deal3MoreCards:" destination="BYZ-38-t0r" id="70i-h1-8WM"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <rotationGestureRecognizer id="uzy-0m-FGE">
+                    <connections>
+                        <action selector="shuffleBoard:" destination="BYZ-38-t0r" id="Dbw-VT-G6Y"/>
+                    </connections>
+                </rotationGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="48.799999999999997" y="20.689655172413794"/>
         </scene>

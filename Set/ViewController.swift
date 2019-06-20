@@ -28,6 +28,24 @@ class ViewController: UIViewController {
             updateViewFromModel()
         }
     }
+    @IBAction func shuffleBoard(_ sender: UIRotationGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            game.cardsOnTheBoard.shuffle()
+            updateViewFromModel()
+        default:
+            break
+        }
+    }
+    @IBAction func deal3MoreCards(_ sender: UISwipeGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            game.deal3MoreCards()
+            updateViewFromModel()
+        default:
+            break
+        }
+    }
     @IBAction func touchDeal3MoreCards(_ sender: UIButton) {
         game.deal3MoreCards()
         updateViewFromModel()
