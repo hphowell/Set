@@ -10,18 +10,38 @@ import UIKit
 
 class SetCardView: UIView {
     
-    var shape = "oval"
-    var number = 2
-    var shading = "empty"
-    var color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-    var isSelected = false
+    var shape = "oval" {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    var number = 2 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    var shading = "empty" {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    var color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1) {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    var cardIsSelected = false {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
 
     override func draw(_ rect: CGRect) {
         let card = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         card.addClip()
         UIColor.white.setFill()
         card.fill()
-        if isSelected {
+        if cardIsSelected {
             card.lineWidth = lineWidth
             UIColor.blue.setStroke()
             card.stroke()
