@@ -77,7 +77,7 @@ class Set
             }
             selectedCards = []
             score += 3
-        } else {
+        } else if !deck.isEmpty{
             selectedCards = []
             score -= 5
         }
