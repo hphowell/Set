@@ -14,14 +14,18 @@ class SetCardView: UIView {
     var number = 2
     var shading = "empty"
     var color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-
-
+    var isSelected = false
 
     override func draw(_ rect: CGRect) {
         let card = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         card.addClip()
         UIColor.white.setFill()
         card.fill()
+        if isSelected {
+            card.lineWidth = lineWidth
+            UIColor.blue.setStroke()
+            card.stroke()
+        }
         let context = UIGraphicsGetCurrentContext()
         let stripes = UIBezierPath()
         stripes.move(to: bounds.origin)

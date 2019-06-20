@@ -17,9 +17,26 @@ class SetBoardView: UIView {
         // Drawing code
     }
     */
-    var numberOfCards = 12
+    var numberOfCards = 12 {
+        didSet {
+            grid.cellCount = numberOfCards
+            self.subviews.forEach({ $0.removeFromSuperview()})
+            for cardIndex in 0..<numberOfCards {
+                if let cell = grid[cardIndex] {
+                    let card = SetCardView(frame: cell)
+                    card.shape = "oval"
+                    card.number = 2
+                    card.shading = "empty"
+                    card.color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+                    addSubview(card)
+                }
+            }
+        }
+    }
+        
+    var selectedCardIndex: Int?
+    lazy var grid = Grid(layout: .aspectRatio(Ratios.cardAspectRatio), frame: bounds)
     func createCardsView () {
-        var grid = Grid(layout: .aspectRatio(Ratios.cardAspectRatio), frame: bounds)
         grid.cellCount = numberOfCards
         for cardIndex in 0..<numberOfCards {
             if let cell = grid[cardIndex] {
