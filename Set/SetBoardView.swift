@@ -10,13 +10,9 @@ import UIKit
 
 class SetBoardView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
-        // Drawing code
+        grid = Grid(layout: .aspectRatio(Ratios.cardAspectRatio), frame: bounds)
     }
-    */
     var cards: [SetCardView] = []
     var numberOfCards = 12 {
         didSet {
@@ -31,6 +27,7 @@ class SetBoardView: UIView {
                     card.number = 2
                     card.shading = "empty"
                     card.color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+                    card.isOpaque = false
                     addSubview(card)
                 }
             }

@@ -35,13 +35,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDT-ia-4Jt">
-                                <rect key="frame" x="125" y="736" width="125.33333333333331" height="42"/>
+                                <rect key="frame" x="125" y="736" width="125" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jTf-Eq-aTf" customClass="SetBoardView" customModule="Set" customModuleProvider="target">
-                                <rect key="frame" x="16" y="83" width="343" height="646"/>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jTf-Eq-aTf" customClass="SetBoardView" customModule="Set" customModuleProvider="target">
+                                <rect key="frame" x="16" y="82" width="343" height="646"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="EeV-ZS-iNK" appends="YES" id="fq7-Wj-Kq9"/>
