@@ -18,20 +18,6 @@ class SetBoardView: UIView {
         didSet {
             grid.cellCount = numberOfCards
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationTimes.resizeTime, delay: 0, options: .curveEaseInOut, animations: resizeGrid)
-            if numberOfCards > 12 {
-                for cardIndex in numberOfCards-3..<numberOfCards {
-                    if let cell = grid[cardIndex] {
-                        let card = SetCardView(frame: cell)
-                        cards.append(card)
-                        card.shape = "oval"
-                        card.number = 2
-                        card.shading = "empty"
-                        card.color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-                        card.isOpaque = false
-                        addSubview(card)
-                    }
-                }
-            }
         }
     }
         
@@ -57,6 +43,18 @@ class SetBoardView: UIView {
         for cardIndex in 0..<subviews.count {
             if let cell = grid[cardIndex] {
                 cards[cardIndex].frame = cell
+            }
+        }
+    }
+    
+    func add3Cards() {
+        numberOfCards += 3
+        for cardIndex in numberOfCards-3..<numberOfCards {
+            if let cell = grid[cardIndex] {
+                let card = SetCardView(frame: cell)
+                cards.append(card)
+                card.isOpaque = false
+                addSubview(card)
             }
         }
     }

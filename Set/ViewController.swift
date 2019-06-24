@@ -43,6 +43,7 @@ class ViewController: UIViewController {
     }
     @IBAction func touchDeal3MoreCards(_ sender: UIButton) {
         game.deal3MoreCards()
+        board.add3Cards()
         updateViewFromModel()
     }
     

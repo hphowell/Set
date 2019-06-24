@@ -54,7 +54,8 @@ class Set
                 selectedCards.append(cardsOnTheBoard[index])
             }
         } else if selectedCards.count == 3 {
-            print("Cannot select more than 3 cards or deselect once 3 are chosen.")
+            selectedCards = []
+            selectedCards.append(cardsOnTheBoard[index])
         } else {
             print("Selected card is not on the board.")
         }
