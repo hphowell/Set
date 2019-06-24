@@ -19,8 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6y-Ip-loS">
-                                <rect key="frame" x="231" y="44" width="128" height="30"/>
-                                <state key="normal" title="Deal 3 More Cards"/>
+                                <rect key="frame" x="16" y="736" width="121" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="Rd5-Pb-dQS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Deal"/>
                                 <connections>
                                     <action selector="touchDeal3MoreCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oca-1a-7I0"/>
                                 </connections>
@@ -34,49 +39,48 @@
                                     <action selector="touchNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GW3-7h-2PQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDT-ia-4Jt">
-                                <rect key="frame" x="125" y="736" width="125" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jTf-Eq-aTf" customClass="SetBoardView" customModule="Set" customModuleProvider="target">
                                 <rect key="frame" x="16" y="82" width="343" height="646"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="EeV-ZS-iNK" appends="YES" id="fq7-Wj-Kq9"/>
                                     <outletCollection property="gestureRecognizers" destination="uzy-0m-FGE" appends="YES" id="lwK-tZ-faF"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56P-nF-Y9R">
+                                <rect key="frame" x="238" y="736" width="121" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="HW5-BX-ovc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="0 Sets"/>
+                                <connections>
+                                    <action selector="touchDeal3MoreCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IW2-KZ-RRY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.00096959455142308281" green="0.34146914779898474" blue="0.0015044142285383143" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jTf-Eq-aTf" firstAttribute="top" secondItem="h6y-Ip-loS" secondAttribute="bottom" constant="8" symbolic="YES" id="1Fx-dB-No6"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LDT-ia-4Jt" secondAttribute="bottom" id="8yb-w5-ban"/>
                             <constraint firstItem="jTf-Eq-aTf" firstAttribute="top" secondItem="rxO-yK-7jC" secondAttribute="bottom" constant="8" symbolic="YES" id="Ab9-up-EZ7"/>
-                            <constraint firstItem="h6y-Ip-loS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rxO-yK-7jC" secondAttribute="trailing" constant="8" symbolic="YES" id="B5a-En-qqH"/>
-                            <constraint firstItem="h6y-Ip-loS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ego-kv-K20"/>
+                            <constraint firstItem="56P-nF-Y9R" firstAttribute="top" secondItem="jTf-Eq-aTf" secondAttribute="bottom" constant="8" id="M6B-df-LBz"/>
                             <constraint firstItem="jTf-Eq-aTf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="NEx-6y-kIo"/>
-                            <constraint firstItem="LDT-ia-4Jt" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="PHZ-ZF-PaE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="56P-nF-Y9R" secondAttribute="bottom" id="Y3Z-Jp-z5I"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jTf-Eq-aTf" secondAttribute="trailing" constant="16" id="Zs6-pB-B9V"/>
                             <constraint firstItem="rxO-yK-7jC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bg1-qT-QRl"/>
-                            <constraint firstItem="LDT-ia-4Jt" firstAttribute="top" secondItem="jTf-Eq-aTf" secondAttribute="bottom" constant="8" symbolic="YES" id="kBN-ti-3bH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="56P-nF-Y9R" secondAttribute="trailing" constant="16" id="lCF-jf-OAp"/>
+                            <constraint firstItem="h6y-Ip-loS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="rY2-Lg-c5r"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="h6y-Ip-loS" secondAttribute="bottom" id="s4B-ak-Xmw"/>
                             <constraint firstItem="rxO-yK-7jC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="twl-EI-uWc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h6y-Ip-loS" secondAttribute="trailing" constant="16" id="u9C-TJ-EII"/>
+                            <constraint firstItem="56P-nF-Y9R" firstAttribute="width" secondItem="h6y-Ip-loS" secondAttribute="width" id="wEz-q0-eWk"/>
+                            <constraint firstItem="h6y-Ip-loS" firstAttribute="top" secondItem="jTf-Eq-aTf" secondAttribute="bottom" constant="8" id="yxy-2C-UsC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="board" destination="jTf-Eq-aTf" id="Ccj-JU-kN0"/>
-                        <outlet property="scoreLabel" destination="LDT-ia-4Jt" id="5St-EC-rcp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="down" id="EeV-ZS-iNK">
-                    <connections>
-                        <action selector="deal3MoreCards:" destination="BYZ-38-t0r" id="70i-h1-8WM"/>
-                    </connections>
-                </swipeGestureRecognizer>
                 <rotationGestureRecognizer id="uzy-0m-FGE">
                     <connections>
                         <action selector="shuffleBoard:" destination="BYZ-38-t0r" id="Dbw-VT-G6Y"/>

@@ -13,10 +13,15 @@ class Set
     var allCards: [Card]
     var deck: [Card]
     var cardsOnTheBoard: [Card]
-    var selectedCards: [Card] = []
+    var selectedCards: [Card] = [] {
+        didSet {
+            if isMatch {
+                deal3MoreCards()
+            }
+        }
+    }
     var matchedCards: [Card] = []
     var isMatch: Bool {
-
         var matching = false
         if selectedCards.count == 3 {
             let firstCard = selectedCards[0]

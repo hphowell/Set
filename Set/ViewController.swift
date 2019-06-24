@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchNewGame(_ sender: UIButton) {
         game = Set()
+        board.createCardsView()
         updateViewFromModel()
     }
     
@@ -26,21 +27,15 @@ class ViewController: UIViewController {
             game.selectCard(at: selectedCardIndex)
             board.cards[selectedCardIndex].cardIsSelected = game.selectedCards.contains(game.cardsOnTheBoard[selectedCardIndex])
             updateViewFromModel()
+            if game.isMatch {
+                updateViewFromModel()
+            }
         }
     }
     @IBAction func shuffleBoard(_ sender: UIRotationGestureRecognizer) {
         switch sender.state {
         case .ended:
             game.cardsOnTheBoard.shuffle()
-            updateViewFromModel()
-        default:
-            break
-        }
-    }
-    @IBAction func deal3MoreCards(_ sender: UISwipeGestureRecognizer) {
-        switch sender.state {
-        case .ended:
-            game.deal3MoreCards()
             updateViewFromModel()
         default:
             break
@@ -79,13 +74,14 @@ class ViewController: UIViewController {
             boardCard.cardIsSelected = game.selectedCards.contains(modelCard)
         }
         addCardSelector()
-        scoreLabel.text = "Score: \(game.score)"
     }
     
     func addCardSelector() {
         for card in board.cards {
-            let tap = UITapGestureRecognizer(target: self, action: #selector(touchCard(_:)))
-            card.addGestureRecognizer(tap)
+            if card.gestureRecognizers == nil {
+                let tap = UITapGestureRecognizer(target: self, action: #selector(touchCard(_:)))
+                card.addGestureRecognizer(tap)
+            }
         }
     }
     
