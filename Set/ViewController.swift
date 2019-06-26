@@ -62,6 +62,7 @@ class ViewController: UIViewController {
                         let boardCard = board.cards[cardIndex]
                         let flyawayCard = SetCardView()
                         flyawayCard.frame = boardCard.frame
+                        flyawayCard.isFaceUp = boardCard.isFaceUp
                         flyawayCard.color = boardCard.color
                         flyawayCard.number = boardCard.number
                         flyawayCard.shape = boardCard.shape
@@ -79,7 +80,7 @@ class ViewController: UIViewController {
                     }
                 }
                 _ = Timer.scheduledTimer(withTimeInterval: AnimationTimes.flyaway, repeats: false, block: { _ in self.moveFlyawayCardsToDiscard()})
-                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationTimes.fade, delay: 0, options: .curveLinear, animations: fadeSelectedCards)
+                hideSelectedCards()
                 _ = Timer.scheduledTimer(withTimeInterval: AnimationTimes.fade, repeats: false, block: { _ in self.updateViewFromModel()})
                 game.deal3MoreCards()
             }
@@ -100,6 +101,7 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     func updateViewFromModel() {
+        var cardsToDeal: [SetCardView] = []
         board.numberOfCards = game.cardsOnTheBoard.count
         for cardIndex in board.cards.indices {
             let boardCard = board.cards[cardIndex]
@@ -127,11 +129,19 @@ class ViewController: UIViewController {
             boardCard.cardIsSelected = game.selectedCards.contains(modelCard)
             
             if boardCard.alpha == 0 {
-                let oldFrame = boardCard.frame
-                boardCard.frame = deck.frame
-                boardCard.alpha = 1
-                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationTimes.deal, delay: 0, options: .curveEaseInOut, animations: { boardCard.frame = oldFrame})
+                cardsToDeal.append(boardCard)
             }
+        }
+        var multiplier = 0.0
+        for card in cardsToDeal {
+            let oldFrame = card.frame
+            card.frame = deck.frame
+            card.alpha = 1
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationTimes.deal, delay: multiplier * AnimationTimes.deal, options: .curveEaseInOut, animations: { card.frame = oldFrame})
+            _ = Timer.scheduledTimer(withTimeInterval: AnimationTimes.deal * (multiplier + 1), repeats: false) { _ in
+                UIView.transition(with: card, duration: AnimationTimes.flip, options: .transitionFlipFromLeft, animations: {card.isFaceUp = true})
+            }
+            multiplier += 1
         }
         addCardSelector()
         discardPile.text = "\(String(game.matchedCards.count/3)) Sets"
@@ -145,10 +155,11 @@ class ViewController: UIViewController {
             }
         }
     }
-    private func fadeSelectedCards() {
+    private func hideSelectedCards() {
         for card in game.selectedCards {
             if let cardIndex = game.cardsOnTheBoard.firstIndex(of: card) {
                 board.cards[cardIndex].alpha = 0
+                board.cards[cardIndex].isFaceUp = false
             }
         }
     }
@@ -174,8 +185,9 @@ class ViewController: UIViewController {
 extension ViewController {
     private struct AnimationTimes {
         static let fade = 0.6
-        static let deal = 0.6
+        static let deal = 0.3
         static let flyaway = 0.6
+        static let flip = 0.3
     }
     private struct Magnitudes {
         static let flyaway = 10.0

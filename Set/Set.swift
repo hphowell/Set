@@ -18,7 +18,6 @@ class Set
     var isMatch: Bool {
         var matching = false
         if selectedCards.count == 3 {
-            matching = true
             let firstCard = selectedCards[0]
             let secondCard = selectedCards[1]
             let thirdCard = selectedCards[2]
