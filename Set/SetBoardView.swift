@@ -33,6 +33,7 @@ class SetBoardView: UIView {
             if let cell = grid[cardIndex] {
                 let card = SetCardView(frame: cell)
                 card.isOpaque = false
+                card.alpha = 0
                 addSubview(card)
                 cards.append(card)
             }

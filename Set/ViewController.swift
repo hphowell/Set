@@ -24,14 +24,63 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     
+    lazy var animator = UIDynamicAnimator(referenceView: view)
+    lazy var collisionBehavior : UICollisionBehavior = {
+        let behavior = UICollisionBehavior()
+        behavior.translatesReferenceBoundsIntoBoundary = true
+        animator.addBehavior(behavior)
+        return behavior
+    }()
+    lazy var itemBehavior : UIDynamicItemBehavior = {
+        let behavior = UIDynamicItemBehavior()
+        behavior.elasticity = 1.0
+        behavior.resistance = 0
+        animator.addBehavior(behavior)
+        return behavior
+    }()
+    
+    lazy var flyawayCards: [SetCardView] = []
+    
+    func moveFlyawayCardsToDiscard() {
+        for card in flyawayCards {
+            itemBehavior.removeItem(card)
+            collisionBehavior.removeItem(card)
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationTimes.deal, delay: 0, options: .curveEaseInOut, animations: { [unowned self] in card.frame = self.discardPile.frame})
+            _ = Timer.scheduledTimer(withTimeInterval: AnimationTimes.fade, repeats: false, block: { _ in card.removeFromSuperview() })
+        }
+        flyawayCards = []
+    }
+    
     @objc func touchCard(_ sender: UITapGestureRecognizer) {
         if let selectedCardIndex = board?.cards.firstIndex(of: sender.view as! SetCardView) {
             game.selectCard(at: selectedCardIndex)
             board.cards[selectedCardIndex].cardIsSelected = game.selectedCards.contains(game.cardsOnTheBoard[selectedCardIndex])
             updateViewFromModel()
             if game.isMatch {
+                for card in game.selectedCards {
+                    if let cardIndex = game.cardsOnTheBoard.firstIndex(of: card) {
+                        let boardCard = board.cards[cardIndex]
+                        let flyawayCard = SetCardView()
+                        flyawayCard.frame = boardCard.frame
+                        flyawayCard.color = boardCard.color
+                        flyawayCard.number = boardCard.number
+                        flyawayCard.shape = boardCard.shape
+                        flyawayCard.shading = boardCard.shading
+                        flyawayCard.isOpaque = false
+                        flyawayCards.append(flyawayCard)
+                        board.addSubview(flyawayCard)
+                        collisionBehavior.addItem(flyawayCard)
+                        itemBehavior.addItem(flyawayCard)
+                        let push = UIPushBehavior(items: [flyawayCard], mode: .instantaneous)
+                        push.angle = CGFloat(arc4random()) * CGFloat.pi * 2
+                        push.magnitude = CGFloat(Magnitudes.flyaway)
+                        push.action = { [unowned push] in push.dynamicAnimator?.removeBehavior(push) }
+                        animator.addBehavior(push)
+                    }
+                }
+                _ = Timer.scheduledTimer(withTimeInterval: AnimationTimes.flyaway, repeats: false, block: { _ in self.moveFlyawayCardsToDiscard()})
                 UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationTimes.fade, delay: 0, options: .curveLinear, animations: fadeSelectedCards)
-                _ = Timer.scheduledTimer(withTimeInterval: AnimationTimes.fade, repeats: false, block: { weak in self.updateViewFromModel()})
+                _ = Timer.scheduledTimer(withTimeInterval: AnimationTimes.fade, repeats: false, block: { _ in self.updateViewFromModel()})
                 game.deal3MoreCards()
             }
         }
@@ -78,7 +127,10 @@ class ViewController: UIViewController {
             boardCard.cardIsSelected = game.selectedCards.contains(modelCard)
             
             if boardCard.alpha == 0 {
-                //set frame to deck, change alpha to 1, animate move back to old frame
+                let oldFrame = boardCard.frame
+                boardCard.frame = deck.frame
+                boardCard.alpha = 1
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationTimes.deal, delay: 0, options: .curveEaseInOut, animations: { boardCard.frame = oldFrame})
             }
         }
         addCardSelector()
@@ -122,6 +174,10 @@ class ViewController: UIViewController {
 extension ViewController {
     private struct AnimationTimes {
         static let fade = 0.6
-        static let deal = 0.3
+        static let deal = 0.6
+        static let flyaway = 0.6
+    }
+    private struct Magnitudes {
+        static let flyaway = 10.0
     }
 }
