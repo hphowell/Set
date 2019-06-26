@@ -13,17 +13,12 @@ class Set
     var allCards: [Card]
     var deck: [Card]
     var cardsOnTheBoard: [Card]
-    var selectedCards: [Card] = [] {
-        didSet {
-            if isMatch {
-                deal3MoreCards()
-            }
-        }
-    }
+    var selectedCards: [Card] = []
     var matchedCards: [Card] = []
     var isMatch: Bool {
         var matching = false
         if selectedCards.count == 3 {
+            matching = true
             let firstCard = selectedCards[0]
             let secondCard = selectedCards[1]
             let thirdCard = selectedCards[2]
@@ -79,15 +74,18 @@ class Set
         if isMatch {
             for selectedCardIndex in selectedCards.indices {
                 let matchedCardIndex = cardsOnTheBoard.firstIndex(of: selectedCards[selectedCardIndex])
-                matchedCards.append(cardsOnTheBoard.remove(at: matchedCardIndex!))
+                if deck.isEmpty {
+                    matchedCards.append(cardsOnTheBoard.remove(at: matchedCardIndex!))
+                } else {
+                    cardsOnTheBoard.insert(deck.remove(at: 0), at: matchedCardIndex!)
+                    matchedCards.append(cardsOnTheBoard.remove(at: matchedCardIndex! + 1))
+                }
             }
             selectedCards = []
             score += 3
         } else if !deck.isEmpty{
             selectedCards = []
             score -= 5
-        }
-        if !deck.isEmpty {
             for _ in 0..<3 {
                 cardsOnTheBoard.append(deck.remove(at: 0))
             }

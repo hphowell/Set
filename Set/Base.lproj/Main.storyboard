@@ -18,18 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6y-Ip-loS">
-                                <rect key="frame" x="16" y="736" width="121" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="121" id="Rd5-Pb-dQS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Deal"/>
-                                <connections>
-                                    <action selector="touchDeal3MoreCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oca-1a-7I0"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxO-yK-7jC">
                                 <rect key="frame" x="16" y="44" width="75" height="30"/>
                                 <state key="normal" title="New Game">
@@ -46,38 +34,41 @@
                                     <outletCollection property="gestureRecognizers" destination="uzy-0m-FGE" appends="YES" id="lwK-tZ-faF"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56P-nF-Y9R">
-                                <rect key="frame" x="238" y="736" width="121" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mdv-vt-JVL" customClass="SetDeckView" customModule="Set" customModuleProvider="target">
+                                <rect key="frame" x="16" y="736" width="121" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="121" id="HW5-BX-ovc"/>
+                                    <constraint firstAttribute="width" constant="121" id="e2l-Im-dXD"/>
+                                    <constraint firstAttribute="width" secondItem="mdv-vt-JVL" secondAttribute="height" multiplier="121:42" id="gRX-Cm-pLY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="0 Sets"/>
-                                <connections>
-                                    <action selector="touchDeal3MoreCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IW2-KZ-RRY"/>
-                                </connections>
-                            </button>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="qGT-Mf-h0F" customClass="SetDeckView" customModule="Set" customModuleProvider="target">
+                                <rect key="frame" x="238" y="736" width="121" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="t5U-FP-KsT"/>
+                                    <constraint firstAttribute="width" secondItem="qGT-Mf-h0F" secondAttribute="height" multiplier="121:42" id="zja-Fg-SH2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.00096959455142308281" green="0.34146914779898474" blue="0.0015044142285383143" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="qGT-Mf-h0F" firstAttribute="top" secondItem="jTf-Eq-aTf" secondAttribute="bottom" constant="8" id="3g9-oF-rGx"/>
+                            <constraint firstItem="mdv-vt-JVL" firstAttribute="top" secondItem="jTf-Eq-aTf" secondAttribute="bottom" constant="8" id="3vp-rl-d9q"/>
                             <constraint firstItem="jTf-Eq-aTf" firstAttribute="top" secondItem="rxO-yK-7jC" secondAttribute="bottom" constant="8" symbolic="YES" id="Ab9-up-EZ7"/>
-                            <constraint firstItem="56P-nF-Y9R" firstAttribute="top" secondItem="jTf-Eq-aTf" secondAttribute="bottom" constant="8" id="M6B-df-LBz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mdv-vt-JVL" secondAttribute="bottom" id="GFd-DR-QNs"/>
                             <constraint firstItem="jTf-Eq-aTf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="NEx-6y-kIo"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="56P-nF-Y9R" secondAttribute="bottom" id="Y3Z-Jp-z5I"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qGT-Mf-h0F" secondAttribute="trailing" constant="16" id="TMU-EO-ce3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jTf-Eq-aTf" secondAttribute="trailing" constant="16" id="Zs6-pB-B9V"/>
                             <constraint firstItem="rxO-yK-7jC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bg1-qT-QRl"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="56P-nF-Y9R" secondAttribute="trailing" constant="16" id="lCF-jf-OAp"/>
-                            <constraint firstItem="h6y-Ip-loS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="rY2-Lg-c5r"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="h6y-Ip-loS" secondAttribute="bottom" id="s4B-ak-Xmw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qGT-Mf-h0F" secondAttribute="bottom" id="lIz-pL-4db"/>
                             <constraint firstItem="rxO-yK-7jC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="twl-EI-uWc"/>
-                            <constraint firstItem="56P-nF-Y9R" firstAttribute="width" secondItem="h6y-Ip-loS" secondAttribute="width" id="wEz-q0-eWk"/>
-                            <constraint firstItem="h6y-Ip-loS" firstAttribute="top" secondItem="jTf-Eq-aTf" secondAttribute="bottom" constant="8" id="yxy-2C-UsC"/>
+                            <constraint firstItem="mdv-vt-JVL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="xJ4-b5-7hV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="board" destination="jTf-Eq-aTf" id="Ccj-JU-kN0"/>
+                        <outlet property="deck" destination="mdv-vt-JVL" id="ixe-Kg-FaY"/>
+                        <outlet property="discardPile" destination="qGT-Mf-h0F" id="Amh-Oe-C5v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

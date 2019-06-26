@@ -14,7 +14,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var board: SetBoardView!
     
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var deck: SetDeckView!
+    
+    @IBOutlet weak var discardPile: SetDeckView!
     
     @IBAction func touchNewGame(_ sender: UIButton) {
         game = Set()
@@ -28,7 +30,9 @@ class ViewController: UIViewController {
             board.cards[selectedCardIndex].cardIsSelected = game.selectedCards.contains(game.cardsOnTheBoard[selectedCardIndex])
             updateViewFromModel()
             if game.isMatch {
-                updateViewFromModel()
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationTimes.fade, delay: 0, options: .curveLinear, animations: fadeSelectedCards)
+                _ = Timer.scheduledTimer(withTimeInterval: AnimationTimes.fade, repeats: false, block: { weak in self.updateViewFromModel()})
+                game.deal3MoreCards()
             }
         }
     }
@@ -41,12 +45,11 @@ class ViewController: UIViewController {
             break
         }
     }
-    @IBAction func touchDeal3MoreCards(_ sender: UIButton) {
+    @objc func touchDeal(_ sender: UITapGestureRecognizer) {
         game.deal3MoreCards()
         board.add3Cards()
         updateViewFromModel()
     }
-    
     func updateViewFromModel() {
         board.numberOfCards = game.cardsOnTheBoard.count
         for cardIndex in board.cards.indices {
@@ -73,8 +76,13 @@ class ViewController: UIViewController {
             
             boardCard.number = modelCard.number
             boardCard.cardIsSelected = game.selectedCards.contains(modelCard)
+            
+            if boardCard.alpha == 0 {
+                //set frame to deck, change alpha to 1, animate move back to old frame
+            }
         }
         addCardSelector()
+        discardPile.text = "\(String(game.matchedCards.count/3)) Sets"
     }
     
     func addCardSelector() {
@@ -85,10 +93,21 @@ class ViewController: UIViewController {
             }
         }
     }
+    private func fadeSelectedCards() {
+        for card in game.selectedCards {
+            if let cardIndex = game.cardsOnTheBoard.firstIndex(of: card) {
+                board.cards[cardIndex].alpha = 0
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         board.createCardsView()
+        deck.text = "Draw"
+        let tap = UITapGestureRecognizer(target: self, action: #selector(touchDeal(_:)))
+        deck.addGestureRecognizer(tap)
+        discardPile.text = "0 Sets"
         updateViewFromModel()
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -97,5 +116,12 @@ class ViewController: UIViewController {
             self.updateViewFromModel()
             
         }
+    }
+}
+
+extension ViewController {
+    private struct AnimationTimes {
+        static let fade = 0.6
+        static let deal = 0.3
     }
 }
