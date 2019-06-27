@@ -86,15 +86,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    @IBAction func shuffleBoard(_ sender: UIRotationGestureRecognizer) {
-        switch sender.state {
-        case .ended:
-            game.cardsOnTheBoard.shuffle()
-            updateViewFromModel()
-        default:
-            break
-        }
-    }
     @objc func touchDeal(_ sender: UITapGestureRecognizer) {
         game.deal3MoreCards()
         board.add3Cards()
