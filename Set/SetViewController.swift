@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SetViewController: UIViewController {
     
     lazy var game = Set()
     
@@ -173,7 +173,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension SetViewController {
     private struct AnimationTimes {
         static let fade = 0.6
         static let deal = 0.3
